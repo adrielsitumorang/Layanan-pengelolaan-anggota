@@ -68,7 +68,7 @@ const TambahAnggota = () => {
             lp: lp
           };
         
-          axios.post('http://localhost:5000/pemuridan',data);
+          axios.post('https://sleepy-sands-35892.herokuapp.com/pemuridan',data);
       }
 
     return(
