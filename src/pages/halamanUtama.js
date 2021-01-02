@@ -11,7 +11,8 @@ import TableRow from '@material-ui/core/TableRow';
 import TableContainer from '@material-ui/core/TableContainer';
 import blueGrey from '@material-ui/core/colors/blueGrey';
 import grey from '@material-ui/core/colors/grey';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -22,17 +23,27 @@ const StyledTableCell = withStyles((theme) => ({
   }
 }))(TableCell);
 
-function createData(nim,nama, jurusan, gender, angkatan, LP) {
-  return {nim,nama, jurusan, gender, angkatan, LP };
-}
+// function createData(nim,nama, jurusan, gender, angkatan, LP) {
+//   return {nim,nama, jurusan, gender, angkatan, LP };
+// }
 
-const rows = [
-  createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "Navigator"),
-  createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "Sion"),
-  createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "LPMI")
-];
+// const rows = [
+//   createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "Navigator"),
+//   createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "Sion"),
+//   createData('18218047','Adriel Gustino Parlinggoan Situmorang', "Sistem dan Teknologi Informasi", "Laki-Laki", 2018, "LPMI")
+// ];
 
-const Halamanutama = () => {
+function Halamanutama() {
+  const [rows, setRows] = React.useState([]);
+  
+  React.useEffect(() => {
+    axios.get('https://sleepy-sands-35892.herokuapp.com/pemuridan').then((res) => {
+      setRows(res.data);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
   const useStyles = makeStyles((theme) => ({
     title: { flexGrow: 1 },
     PenjelasanInput:{
@@ -87,13 +98,13 @@ const Halamanutama = () => {
         </TableHead>
         <TableBody>
             {rows.map((row) => (
-              <TableRow key={row.name}>
+              <TableRow key={row.nim}>
                 <TableCell >{row.nim}</TableCell>
                 <TableCell >{row.nama}</TableCell>
                 <TableCell >{row.jurusan}</TableCell>
                 <TableCell >{row.gender}</TableCell>
                 <TableCell >{row.angkatan}</TableCell>
-                <TableCell >{row.LP}</TableCell>
+                <TableCell >{row.lp}</TableCell>
                 <TableCell >
                   <Link to="/Anggota/ubah/" style={{ textDecoration: "none" }}>
                     <button>

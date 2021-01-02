@@ -64,6 +64,7 @@ const TambahAnggota = () => {
             nim: nim,
             nama: nama,
             jurusan: jurusan,
+            gender: gender,
             angkatan: angkatan,
             lp: lp
           };
