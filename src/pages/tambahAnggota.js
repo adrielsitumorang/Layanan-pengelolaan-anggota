@@ -68,8 +68,9 @@ const TambahAnggota = () => {
             angkatan: angkatan,
             lp: lp
           };
-        
-          axios.post('https://sleepy-sands-35892.herokuapp.com/pemuridan',data);
+    
+          axios.post('https://sleepy-sands-35892.herokuapp.com/pemuridan/',data);
+          // axios.post('http://localhost:5000/pemuridan/',data);
       }
 
     return(

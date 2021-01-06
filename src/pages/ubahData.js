@@ -8,15 +8,18 @@ import axios from "axios";
 import {useState } from "react";
 
 const UbahData = () => {
-    const [lp, setlp] = useState("");
+  const [nim, setnim] = useState("");
+  const [lp, setlp] = useState("");
 
-    function submitPerubahanLP() {
-      let data = {
-          lp: lp
-      };
-  
-      axios.put('http://localhost:5000/pemuridan',data);
-    }
+  function ubahLP() {
+    let data = {
+      nim: nim,
+      lp: lp
+    };
+    
+    axios.put('https://sleepy-sands-35892.herokuapp.com/pemuridan',data);
+    // axios.put('http://localhost:5000/pemuridan/',data);
+  }
 
     const useStyles = makeStyles((theme) => ({
       title: { flexGrow: 1 },
@@ -66,12 +69,27 @@ const UbahData = () => {
       <div className={classes.root}>
         <div>
             <Typography variant="h2" color="primary" align="center" className={classes.PenjelasanInput}>
-                Masukkan nama LP
+                Ubah LP
             </Typography>
             <Link to="/" style={{ textDecoration: "none" }} >
                 <HomeIcon color="primary" style={{ fontSize: 65 }} className={classes.home}/>
             </Link>
         </div>
+        <div>
+          <Typography variant="h6" color="primary" className={classes.PenjelasanInput}>
+            <b>
+              NIM
+            </b>
+          </Typography>
+        </div>
+        <form className={classes.KolomSearch} noValidate autoComplete="off">
+            <TextField 
+                id="outlined-basic" 
+                variant="outlined"
+                value={nim}
+                onChange={(e) => { setnim(e.target.value)}} 
+            />
+        </form>
         <div>
           <Typography variant="h6" color="primary" className={classes.PenjelasanInput}>
             <b>
@@ -87,7 +105,7 @@ const UbahData = () => {
                 onChange={(e) => { setlp(e.target.value)}} 
             />
         </form>
-        <Button onClick={() => { submitPerubahanLP() }} variant="contained" color="primary" className={classes.submit} >
+        <Button onClick={() => { ubahLP() }} variant="contained" color="primary" className={classes.submit} >
             Submit
         </Button>
       </div>

@@ -7,7 +7,6 @@ import {
 import Routes from "./routes/rute";
 import Pages from "./pages/pages-common";
 import React, {Component} from 'react';
-import axios from "axios";
 
 class App extends Component{
   render() {

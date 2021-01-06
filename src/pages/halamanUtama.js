@@ -13,6 +13,7 @@ import blueGrey from '@material-ui/core/colors/blueGrey';
 import grey from '@material-ui/core/colors/grey';
 import { Link } from "react-router-dom";
 import axios from "axios";
+import Button from '@material-ui/core/Button';
 
 
 const StyledTableCell = withStyles((theme) => ({
@@ -22,6 +23,31 @@ const StyledTableCell = withStyles((theme) => ({
     fontSize: 18,  
   }
 }))(TableCell);
+
+// const deleteAnggota= async (nim) => {
+// // function deleteAnggota(nim)
+// //   {
+// //     if(window.confirm('Are you sure?'))
+// //     {
+// //       fetch('http://localhost:5000/pemuridan/' + nim,{
+// //         method:'DELETE',
+// //         headers:{'Accept':'application/json',
+// //         'Content-Type': 'application/json'
+// //       }
+// //       })
+// //     }
+//   if(window.confirm('Are you sure?'))
+//   {
+//     return await axios({
+//       method: 'DELETE',
+//       url: 'http://localhost:5000/pemuridan/',
+//       data: {
+//         nim: nim
+//       }
+//   })
+//   }
+//     //axios.delete('http://localhost:5000/pemuridan/',nim);
+//   }
 
 // function createData(nim,nama, jurusan, gender, angkatan, LP) {
 //   return {nim,nama, jurusan, gender, angkatan, LP };
@@ -38,11 +64,34 @@ function Halamanutama() {
   
   React.useEffect(() => {
     axios.get('https://sleepy-sands-35892.herokuapp.com/pemuridan').then((res) => {
+    // axios.get('http://localhost:5000/pemuridan/').then((res) => {
       setRows(res.data);
     }).catch((err) => {
       console.log(err);
     });
   }, []);
+
+  const deleteAnggota= async (nim) => {
+      if(window.confirm('Are you sure?'))
+      {
+        axios({
+          method: 'DELETE',
+          url: 'https://sleepy-sands-35892.herokuapp.com/pemuridan',
+          //url: 'http://localhost:5000/pemuridan/',
+          data: {
+            nim: nim
+          }
+        }).then(() => {
+          axios.get('https://sleepy-sands-35892.herokuapp.com/pemuridan').then((res) => {
+          // axios.get('http://localhost:5000/pemuridan/').then((res) => {
+            setRows(res.data)
+          })
+        }).catch((err) => {
+          console.log(err);
+        })
+      }
+        //axios.delete('http://localhost:5000/pemuridan/',nim);
+      }
 
   const useStyles = makeStyles((theme) => ({
     title: { flexGrow: 1 },
@@ -107,15 +156,15 @@ function Halamanutama() {
                 <TableCell >{row.lp}</TableCell>
                 <TableCell >
                   <Link to="/Anggota/ubah/" style={{ textDecoration: "none" }}>
-                    <button>
+                    <Button  variant="contained" color= "primary" >
                       Ubah LP
-                    </button>
+                    </Button>
                   </Link>
                 </TableCell>
                 <TableCell >
-                  <button>
-                    Hapus
-                  </button>
+                  <Button onClick= {()=> deleteAnggota(row.nim)} variant="contained" color="secondary" >
+                    Hapus 
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
