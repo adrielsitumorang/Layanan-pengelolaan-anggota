@@ -1,8 +1,7 @@
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
-  Link
+  Route
 } from "react-router-dom";
 import Routes from "./routes/rute";
 import Pages from "./pages/pages-common";
@@ -15,6 +14,11 @@ class App extends Component{
       <Router>
         <Switch>
           <Route exact path={Routes.home}>
+            {/* <Pages.HalamanUtama /> */}
+            <Pages.LoginAnggota />
+          </Route>
+          <Route path={Routes.loginAnggota}>
+            {/* <Pages.LoginAnggota /> */}
             <Pages.HalamanUtama />
           </Route>
           <Route path={Routes.tambahAnggota}>

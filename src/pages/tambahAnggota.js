@@ -79,7 +79,7 @@ const TambahAnggota = () => {
             <Typography variant="h2" color="primary" align="center" className={classes.PenjelasanInput}>
                 Masukkan data anggota
             </Typography>
-            <Link to="/" style={{ textDecoration: "none" }} >
+            <Link to="/dashboard" style={{ textDecoration: "none" }} >
                 <HomeIcon color="primary" style={{ fontSize: 65 }} className={classes.home}/>
             </Link>
         </div>
